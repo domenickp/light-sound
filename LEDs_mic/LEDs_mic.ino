@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #ifdef __AVR__
-  #include <avr/power.h>
+#include <avr/power.h>
 #endif
 
 #define PIN 6
@@ -20,13 +20,12 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(8, PIN, NEO_GRB + NEO_KHZ800);
 // and minimize distance between Arduino and first pixel.  Avoid connecting
 // on a live circuit...if you must, connect GND first.
 
-const int sampleWindow = 50; // Sample window width in mS (50 mS = 20Hz)
 unsigned int sample;
 
 void setup() {
-
-
+  analogReference(EXTERNAL);
   strip.begin();
+  strip.setBrightness(64);
   strip.show(); // Initialize all pixels to 'off'
   Serial.begin(9600);
 }
@@ -43,17 +42,145 @@ void loop() {
 //  theaterChase(strip.Color(0, 0, 127), 50); // Blue
 //
 //  rainbow(20);
-  rainbowCycle(20);
+//  rainbowCycle(20);
 //  theaterChaseRainbow(50);
 
+    strip.setPixelColor(0, strip.Color(0, 0, 0));
+    strip.setPixelColor(1, strip.Color(0, 0, 0));
+    strip.setPixelColor(2, strip.Color(0, 0, 0));
+    strip.setPixelColor(3, strip.Color(0, 0, 0));
+    strip.setPixelColor(4, strip.Color(0, 0, 0));
+    strip.setPixelColor(5, strip.Color(0, 0, 0));
+    strip.setPixelColor(6, strip.Color(0, 0, 0));
+    strip.setPixelColor(7, strip.Color(0, 0, 0));
+    strip.show();
+  float soundVolts;
+  soundVolts = sampleSound(); // Also happens to introduce a 50 ms wait
+  Serial.println(soundVolts);
+
+  if(soundVolts > 0.10) {
+    strip.setPixelColor(1, strip.Color(255, 0, 0));
+    strip.setPixelColor(1, strip.Color(0, 0, 0));
+    strip.setPixelColor(2, strip.Color(0, 0, 0));
+    strip.setPixelColor(3, strip.Color(0, 0, 0));
+    strip.setPixelColor(4, strip.Color(0, 0, 0));
+    strip.setPixelColor(5, strip.Color(0, 0, 0));
+    strip.setPixelColor(6, strip.Color(0, 0, 0));
+    strip.setPixelColor(7, strip.Color(0, 0, 0));
+    strip.show();
+    delay(50);
+  }
+  if(soundVolts > 0.40) {
+    strip.setPixelColor(0, strip.Color(255, 0, 0));
+    strip.setPixelColor(1, strip.Color(255, 128, 0));
+    strip.setPixelColor(2, strip.Color(0, 0, 0));
+    strip.setPixelColor(3, strip.Color(0, 0, 0));
+    strip.setPixelColor(4, strip.Color(0, 0, 0));
+    strip.setPixelColor(5, strip.Color(0, 0, 0));
+    strip.setPixelColor(6, strip.Color(0, 0, 0));
+    strip.setPixelColor(7, strip.Color(0, 0, 0));
+    strip.show();
+    delay(50);
+  }
+  if(soundVolts > 0.70) {
+    strip.setPixelColor(0, strip.Color(255, 0, 0));
+    strip.setPixelColor(1, strip.Color(255, 128, 0));
+    strip.setPixelColor(2, strip.Color(255, 255, 0));
+    strip.setPixelColor(3, strip.Color(0, 0, 0));
+    strip.setPixelColor(4, strip.Color(0, 0, 0));
+    strip.setPixelColor(5, strip.Color(0, 0, 0));
+    strip.setPixelColor(6, strip.Color(0, 0, 0));
+    strip.setPixelColor(7, strip.Color(0, 0, 0));
+    strip.show();
+    delay(50);
+  }
+  if(soundVolts > 1.10) {
+    strip.setPixelColor(0, strip.Color(255, 0, 0));
+    strip.setPixelColor(1, strip.Color(255, 128, 0));
+    strip.setPixelColor(2, strip.Color(255, 255, 0));
+    strip.setPixelColor(3, strip.Color(0, 255, 0));
+    strip.setPixelColor(4, strip.Color(0, 0, 0));
+    strip.setPixelColor(5, strip.Color(0, 0, 0));
+    strip.setPixelColor(6, strip.Color(0, 0, 0));
+    strip.setPixelColor(7, strip.Color(0, 0, 0));
+    strip.show();
+    delay(50);
+  }
+  if(soundVolts > 1.50) {
+    strip.setPixelColor(0, strip.Color(255, 0, 0));
+    strip.setPixelColor(1, strip.Color(255, 128, 0));
+    strip.setPixelColor(2, strip.Color(255, 255, 0));
+    strip.setPixelColor(3, strip.Color(0, 255, 0));
+    strip.setPixelColor(4, strip.Color(0, 0, 255));
+    strip.setPixelColor(5, strip.Color(0, 0, 0));
+    strip.setPixelColor(6, strip.Color(0, 0, 0));
+    strip.setPixelColor(7, strip.Color(0, 0, 0));
+    strip.show();
+    delay(50);
+  }
+  if(soundVolts > 1.90) {
+    strip.setPixelColor(0, strip.Color(255, 0, 0));
+    strip.setPixelColor(1, strip.Color(255, 128, 0));
+    strip.setPixelColor(2, strip.Color(255, 255, 0));
+    strip.setPixelColor(3, strip.Color(0, 255, 0));
+    strip.setPixelColor(4, strip.Color(0, 0, 255));
+    strip.setPixelColor(5, strip.Color(127, 0, 255));
+    strip.setPixelColor(6, strip.Color(0, 0, 0));
+    strip.setPixelColor(7, strip.Color(0, 0, 0));
+    strip.show();
+    delay(50);
+  }
+  if(soundVolts > 2.30) {
+    strip.setPixelColor(0, strip.Color(255, 0, 0));
+    strip.setPixelColor(1, strip.Color(255, 128, 0));
+    strip.setPixelColor(2, strip.Color(255, 255, 0));
+    strip.setPixelColor(3, strip.Color(0, 255, 0));
+    strip.setPixelColor(4, strip.Color(0, 0, 255));
+    strip.setPixelColor(5, strip.Color(127, 0, 255));
+    strip.setPixelColor(6, strip.Color(255, 0, 127));
+    strip.setPixelColor(7, strip.Color(0, 0, 0));
+    strip.show();
+    delay(50);
+  }
+  if(soundVolts > 2.70) {
+    strip.setPixelColor(0, strip.Color(255, 0, 0));
+    strip.setPixelColor(1, strip.Color(255, 128, 0));
+    strip.setPixelColor(2, strip.Color(255, 255, 0));
+    strip.setPixelColor(3, strip.Color(0, 255, 0));
+    strip.setPixelColor(4, strip.Color(0, 0, 255));
+    strip.setPixelColor(5, strip.Color(127, 0, 255));
+    strip.setPixelColor(6, strip.Color(255, 0, 127));
+    strip.setPixelColor(7, strip.Color(255, 255, 255));
+    strip.show();
+    delay(50);
+    theaterChase(strip.Color(127, 127, 127), 50);
+  }
+  
+
+//  // This is rainbowCycle
+//  uint16_t i, j;
+//
+//  for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
+//    for(i=0; i< strip.numPixels(); i++) {
+//      strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()) + j) & 255));
+//    }
+//    strip.show();
+//    soundVolts = sampleSound(); // Also happens to introduce a 50 ms wait
+//    Serial.println(soundVolts);
+//  }
+
+}
+
+float sampleSound() {
    unsigned long startMillis= millis();  // Start of sample window
    unsigned int peakToPeak = 0;   // peak-to-peak level
  
    unsigned int signalMax = 0;
    unsigned int signalMin = 1024;
- 
+
+   // Sample window width in mS (50 mS = 20Hz)
    // collect data for 50 mS
-   while (millis() - startMillis < sampleWindow)
+   while (millis() - startMillis < 50)
    {
       sample = analogRead(0);
       if (sample < 1024)  // toss out spurious readings
@@ -71,7 +198,7 @@ void loop() {
    peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
    double volts = (peakToPeak * 5.0) / 1024;  // convert to volts
  
-   Serial.println(volts);
+   return volts;
 }
 
 // Fill the dots one after the other with a color
